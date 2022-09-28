@@ -1,0 +1,67 @@
+﻿@model Acceptance.ViewModels.Account.EditViewModel
+@{
+    ViewData["Title"] = "Foydalanuvchini tahrirlash";
+}
+
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Foydalanuvchini tahrirlash</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Foydalanuvchini tahrirlash</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <form asp-controller="account" asp-action="edit" method="post">
+                            <h6 class="mb-25">Ma'lumotlarni tahrirlash</h6>
+                            <div asp-validation-summary="All"></div>
+                            <div class="input-style-1">
+                                <label asp-for="Username"></label>
+                                <input type="text" required asp-for="Username" />
+                            </div>
+                            <div class="select-style-1">
+                                <label asp-for="Enabled"></label>
+                                <div class="select-position">
+                                    <select required asp-for="Enabled">
+                                        <option value="true">Aktivlashtirish</option>
+                                        <option value="false">O'chirish</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-style-1">
+                                <label asp-for="Role"></label>
+                                <div class="select-position">
+                                    <select required asp-for="Role">
+                                        <option selected disabled>-- Foydalanuvchi rolini tanlang --</option>
+                                        <option value="guest">Konsalting</option>
+                                        <option value="host">HighWay uchun admin</option>
+                                        <option value="owner">Super Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="main-btn primary-btn w-100">Tahrirlash</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

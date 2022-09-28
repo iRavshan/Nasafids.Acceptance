@@ -1,0 +1,67 @@
+﻿@model Acceptance.ViewModels.Faculty.CreateViewModel
+@{
+    ViewData["Title"] = "Yangi ta'lim yo'nalishi";
+}
+
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Yangi ta'lim yo'nalishi</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Yangi ta'lim yo'nalishi</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <form asp-controller="faculty" asp-action="create" method="post">
+                            <h6 class="mb-25">Ma'lumotlarni kiriting</h6>
+                            <div asp-validation-summary="All"></div>
+                            <div class="input-style-1">
+                                <label asp-for="Name"></label>
+                                <input type="text" required asp-for="Name" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="Number"></label>
+                                <input type="number" required asp-for="Number" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PriceOfDay"></label>
+                                <input type="number" required asp-for="PriceOfDay" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PriceOfNight"></label>
+                                <input type="number" required asp-for="PriceOfNight" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PeriodOfDay"></label>
+                                <input type="number" required asp-for="PeriodOfDay" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PeriodOfNight"></label>
+                                <input type="number" required asp-for="PeriodOfNight" />
+                            </div>
+                            <button type="submit" class="main-btn primary-btn w-100">Yaratish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

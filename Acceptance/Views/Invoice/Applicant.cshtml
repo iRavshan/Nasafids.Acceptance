@@ -1,0 +1,48 @@
+﻿@model Acceptance.ViewModels.Invoice.SearchViewModel
+@{
+    ViewData["Title"] = "Talabgor shartnomasini qidirish";
+}
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Talabgor</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Talabgor</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10 col-md-12">
+                     <form asp-controller="invoice" asp-action="applicant" method="post">
+                          <div class="row">
+                               <div class="col-lg-10 col-md-8">
+                                    <div class="input-style-1">
+                                    <input type="text" asp-for="SearchText" placeholder="Shartnoma raqamini kiriting ..." />
+                                         <span class="text-danger" asp-validation-for="SearchText"></span>
+                                    </div>
+                               </div>
+                               <div class="col-lg-2 col-md-4">
+                                    <button type="submit" class="main-btn primary-btn"><i class="lni lni-search-alt"></i> Qidirish</button>
+                               </div>
+                          </div>
+                     </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>

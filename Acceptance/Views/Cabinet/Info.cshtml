@@ -1,0 +1,56 @@
+﻿@model Acceptance.ViewModels.Cabinet.InfoViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>@Model.Name</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Shaxsiy kabinet</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Hujjatlar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <!--<div class="card-style mb-30">
+                        <form asp-controller="cabinet" asp-action="contract" asp-route-Id="@Model.Id" method="post">
+                            <button type="submit" class="main-btn primary-btn w-100">Shartnomani yuklab olish</button>
+                        </form>
+                    </div>-->
+                    <div class="card-style mb-30">
+                        <form asp-controller="cabinet" asp-action="receipt" asp-route-Id="@Model.Id" method="post">
+                            <button type="submit" class="main-btn primary-btn w-100">Tilxatni yuklab olish</button>
+                        </form>
+                    </div>
+                    @if(Model.Payments.Count() != 0)
+                    {
+                        foreach (var item in Model.Payments)
+                        {
+                            <div class="card-style mb-30">
+                                <a asp-action="getpayment" asp-controller="invoice" asp-route-Id="@item.Id" class="main-btn primary-btn w-100">Chekni yuklab olish (@item.DateTime.ToString("dd.MM.yyyy HH:mm"))</a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

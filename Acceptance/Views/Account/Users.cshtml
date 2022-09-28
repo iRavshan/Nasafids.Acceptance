@@ -1,0 +1,86 @@
+﻿@model UsersViewModel
+@{
+    ViewData["Title"] = "Barcha foydalanuvchilar";
+    int counter = 1;
+}
+
+<section class="table-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Foydalanuvchilar</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#0">Boshqaruv</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Foydalanuvchilar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tables-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-style mb-30">
+                        <h6 class="mb-10">Ro'yxatga olingan foydalanuvchilar</h6>
+                        <p class="text-sm mb-20">Barcha ro'yxatga olingan foydalanuvchilar faqatgina SuperAdmin uchun ochiq.</p>
+                        <div class="table-wrapper table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th><h6>F.I.O</h6></th>
+                                        <th><h6>Kalit</h6></th>
+                                        <th><h6>Roli</h6></th>
+                                        <th><h6>Holati</h6></th>
+                                        <th><h6>Tahrirlash</h6></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Users)
+                                    {
+                                     <tr>
+                                        <td><h6 class="text-sm">@counter</h6></td>
+                                        <td class="min-width">
+                                            <p>@item.Username</p>
+                                        </td>
+                                        <td class="min-width">
+                                            <p>@item.Id.ToString().ToUpper()</p>
+                                        </td>
+                                        <td class="min-width">
+                                            <p>@item.Role</p>
+                                        </td>
+                                        <td class="min-width">
+                                            @if (item.Enabled)
+                                            {
+                                                <span class="status-btn success-btn">Aktiv</span>
+                                            }
+                                            @if (!item.Enabled)
+                                            {
+                                                <span class="status-btn close-btn">O'chirilgan</span>
+                                            }
+                                        </td>
+                                        <td class="min-width">
+                                            <p>
+                                                <a asp-controller="account" asp-action="edit" asp-route-Id="@item.Id"><i class="lni lni-pencil"></i></a>
+                                            </p>
+                                        </td>
+                                     </tr>
+                                     counter++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

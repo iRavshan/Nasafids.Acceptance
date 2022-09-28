@@ -1,0 +1,172 @@
+﻿@model Acceptance.ViewModels.Applicant.DetailsViewModel
+@{
+    ViewData["Title"] = Model.Applicant.FullName;
+}
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Talabgor</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Talabgor</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <h6 class="mb-25">Shaxsiy ma'lumotlar</h6>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><h5>F.I.SH:</h5></td>
+                                    <td>@Model.Applicant.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Telefon raqami:</h5></td>
+                                    <td>@Model.Applicant.PhoneNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Qo'shimcha telefon raqami:</h5></td>
+                                    <td>@Model.Applicant.SecondPhoneNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Passport seriyasi:</h5></td>
+                                    <td>@Model.Applicant.PassportSeries</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Passport raqami:</h5></td>
+                                    <td>@Model.Applicant.PassportNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>JShIR:</h5></td>
+                                    <td>@Model.Applicant.JShIR</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Manzili:</h5></td>
+                                    <td>@Model.Applicant.Location</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ta'lim yo'nalishi:</h5></td>
+                                    <td>@Model.Applicant.Faculty.Name</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ta'lim shakli:</h5></td>
+                                    <td>@Model.Applicant.TypeOfEducation</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Imtihonda to'plagan bali:</h5></td>
+                                    <td>@Model.Applicant.ExamScrore</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Jami to'lov miqdori:</h5></td>
+                                    <td>@Model.Applicant.Payments.Sum(w => w.Sum) so'm</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ro'yxatga oluvchi:</h5></td>
+                                    <td>@Model.Applicant.User.Username</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ro'yxatga olingan sana:</h5></td>
+                                    <td>@Model.Applicant.RegistrationDateTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Holati:</h5></td>
+                                    <td>
+                                        @if (Model.Applicant.State == 0)
+                                        {
+                                            <span class="status-btn active-btn">Kutilmoqda</span>
+                                        }
+                                        @if (Model.Applicant.State == 1)
+                                        {
+                                            <span class="status-btn close-btn">Qaytarildi</span>
+                                        }
+                                        @if (Model.Applicant.State == 2)
+                                        {
+                                            <span class="status-btn success-btn">Qabul qilindi</span>
+                                        }
+                                    </td>
+                                </tr>
+                                @if (Model.Applicant.State == 2)
+                                {
+                                    <tr>
+                                        <td><h5>Tilxat:</h5></td>
+                                        <td>
+                                            <form asp-controller="applicant" asp-action="receipt" asp-route-Id="@Model.Applicant.Id" method="post">
+                                                <button type="submit" class="main-btn light-btn-outline btn-hover">Yuklab olish</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="row mt-3">
+                            @if((User.IsInRole("guest") && (Model.Applicant.State != 2)) || User.IsInRole("host") || User.IsInRole("owner"))
+                             {
+                                <div class="col-3">
+                                    <a asp-controller="applicant" asp-action="edit" asp-route-Id="@Model.Applicant.Id" class="main-btn primary-btn-outline btn-hover">
+                                        <i class="lni lni-pencil"></i> Tahrirlash
+                                    </a>
+                                </div>
+                             }
+                            
+
+                            @if (User.IsInRole("owner") && Model.Applicant.State != 1)
+                            {
+                                <div class="col-3">
+                                    <form asp-controller="applicant" asp-action="applicanttorepetition" asp-route-Id="@Model.Applicant.Id" method="post">
+                                        <button type="submit" class="main-btn info-btn-outline btn-hover" onclick="return confirm('Ushbu ma`lumotlarni rostdan ham qaytarmoqchimisiz ?')">
+                                            Qaytarish
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+
+                            @if (User.IsInRole("owner") && Model.Applicant.State != 2)
+                            {
+                                <div class="col-3">
+                                    <form asp-controller="applicant" asp-action="applicanttoaccept" asp-route-Id="@Model.Applicant.Id" method="post">
+                                        <button type="submit" class="main-btn success-btn-outline btn-hover" onclick="return confirm('Ushbu ma`lumotlarni rostdan ham tasdiqlamoqchimisiz ?')">
+                                            Tasdiqlash
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+
+                            @if (User.IsInRole("owner"))
+                            {
+                                <div class="col-3">
+                                    <form asp-controller="applicant" asp-action="deleteapplicant" asp-route-Id="@Model.Applicant.Id" method="post">
+                                        <button type="submit" class="main-btn danger-btn-outline btn-hover" onclick="return confirm('Ushbu ma`lumotlarni rostdan ham o`chirmoqchimisiz ?')">
+                                            <i class="lni lni-trash-can"></i> O'chirish
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

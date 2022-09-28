@@ -1,0 +1,86 @@
+﻿@model Acceptance.ViewModels.Invoice.DetailsViewModel
+@{
+    ViewData["Title"] = "To'lov";
+}
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>To'lov</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">To'lov</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <h6 class="mb-25">To'lov ma'lumotlari</h6>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><h5>F.I.SH:</h5></td>
+                                    @if (Model.Payment.Applicant is null)
+                                    {
+                                        <td>@Model.Payment.Mover.FullName</td>
+                                    }
+                                    @if (Model.Payment.Mover is null)
+                                    {
+                                        <td>@Model.Payment.Applicant.FullName</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td><h5>Shartnoma raqami:</h5></td>
+                                    @if (Model.Payment.Applicant is null)
+                                    {
+                                        <td>@Model.Payment.Mover.JShIR</td>
+                                    }
+                                    @if (Model.Payment.Mover is null)
+                                    {
+                                        <td>@Model.Payment.Applicant.JShIR</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td><h5>To'lov miqdori:</h5></td>
+                                    <td>@Model.Payment.Sum so'm</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>To'lov ID raqami:</h5></td>
+                                    <td>@Model.Payment.Id</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Sana va vaqti:</h5></td>
+                                    <td>@Model.Payment.DateTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>To'lov qog'ozi:</h5></td>
+                                    <td> <a asp-controller="invoice" asp-action="getpayment" asp-route-Id="@Model.Payment.Id">Yuklab olish</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

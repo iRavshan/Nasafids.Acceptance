@@ -1,0 +1,99 @@
+﻿@model Acceptance.ViewModels.Mover.AcceptanceViewModel
+@{
+    ViewData["Title"] = "O'qishni ko'chiruvchi";
+}
+
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Qabul</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Qabul</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <form asp-controller="mover" asp-action="acceptance" method="post">
+                            <h6 class="mb-25">Shaxsiy ma'lumotlarni kiriting</h6>
+                            <div asp-validation-summary="All"></div>
+                            <div class="input-style-1">
+                                <label asp-for="FullName"></label>
+                                <input type="text" required asp-for="FullName" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PhoneNumber"></label>
+                                <input type="text" required id="phone" asp-for="PhoneNumber" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="SecondPhoneNumber"></label>
+                                <input type="text" required id="phone2" asp-for="SecondPhoneNumber" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="JShIR"></label>
+                                <input type="number" required asp-for="JShIR" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PassportSeries"></label>
+                                <input type="text" required asp-for="PassportSeries" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="PassportNumber"></label>
+                                <input type="number" required asp-for="PassportNumber" />
+                            </div>
+                            <div class="input-style-1">
+                                <label asp-for="Location"></label>
+                                <input type="text" required asp-for="Location" />
+                            </div>
+                            <div class="select-style-1">
+                                <label asp-for="Faculty"></label>
+                                <div class="select-position">
+                                    <select required asp-for="Faculty">
+                                        <option selected disabled>Ta'lim yo'nalishini tanlang</option>
+                                        @foreach (var fac in Model.Faculties)
+                                        {
+                                            <option value="@fac.Id">@fac.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-style-1">
+                                <label asp-for="TypeOfEducation"></label>
+                                <div class="select-position">
+                                    <select required asp-for="TypeOfEducation">
+                                        <option selected disabled>-- Ta'lim shaklini tanlang --- </option>
+                                        <option value="Kunduzgi">Kunduzgi</option>
+                                        <option value="Sirtqi">Sirtqi</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="info-primary mt-2 mb-4">
+                                * Talabgorning diplom yoki attestati (ilovasi bilan birga) va transkriptining elektron nusxalarini
+                                yagona .zip yoki .rar fayl ko'rinishida talabgorning F.I.SH nomi bilan saqlagan holda <a href="https://t.me/highway40"> QABUL BOTIGA <i class="lni lni-reply"></i></a> yuboring.
+                            </p>
+                            <p class="info-primary mt-2 mb-4">* <i>Eslatma: Elektron nusxalari yuborilmagan hujjatlar haqiqiy hisoblanmaydi va bekor qilinadi.</i></p>
+
+                            <button type="submit" class="main-btn primary-btn w-100">Yuborish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,87 @@
+﻿@model Acceptance.ViewModels.Faculty.FacultiesViewModel
+@{
+    ViewData["Title"] = "Barcha yo'nalishlar";
+    int counter = 1;
+}
+
+<section class="table-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Ta'lim yo'nalishlari</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#0">Boshqaruv</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ta'lim yo'nalishlari</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tables-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-style mb-30">
+                        <h6 class="mb-10">Ro'yxatga olingan ta'lim yo'nalishlari</h6>
+                        <p class="text-sm mb-20">Barcha ro'yxatga olingan ta'lim yo'nalishlari faqatgina SuperAdmin uchun ochiq.</p>
+                        <div class="table-wrapper table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th><h6>Nomi</h6></th>
+                                        <th><h6>Raqami</h6></th>
+                                        <th><h6>Narxi(kunduzgi)</h6></th>
+                                        <th><h6>Narxi(sirtqi)</h6></th>
+                                        <th><h6>Tahrirlash</h6></th>
+                                        <th><h6>O'chirish</h6></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Faculties)
+                                    {
+                                    <tr>
+                                        <td><h6 class="text-sm">@counter</h6></td>
+                                        <td class="min-width">
+                                            <p>@item.Name</p>
+                                        </td>
+                                        <td class="min-width">
+                                            <p>@item.Number</p>
+                                        </td>
+                                        <td class="min-width">
+                                            <p>@item.PriceOfDay</p>
+                                        </td>
+                                        <td class="min-width">
+                                            <p>@item.PriceOfNight</p>
+                                        </td>
+                                        <td class="min-width">
+                                            <p>
+                                                <a asp-controller="faculty" asp-action="edit" asp-route-Id="@item.Id"><i class="lni lni-pencil"></i></a>
+                                            </p>
+                                        </td>
+                                        <td class="min-width">
+                                            <form asp-controller="faculty" asp-action="delete" asp-route-Id="@item.Id" method="post">
+                                                <button type="submit" onclick="return confirm('Ushbu ma`lumotni rostdan ham o`chirmoqchimisiz ?')"
+                                                        class="main-btn danger-btn-outline btn-hover"><i class="lni lni-trash-can"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                        counter++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

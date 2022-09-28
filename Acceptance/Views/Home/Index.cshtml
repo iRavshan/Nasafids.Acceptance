@@ -1,0 +1,187 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Statistika";
+}
+
+<section class="section">
+        <div class="container-fluid">
+          <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="title mb-30">
+                  <h2>Talabgorlar</h2>
+                </div>
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="#0">Bosh sahifa</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Statistika
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Bugunlik</h6>
+                  <h3 class="text-bold mb-10">@Model.ApplicantsCountOnToday</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Kecha</h6>
+                  <h3 class="text-bold mb-10">@Model.ApplicantsCountOnWeek</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Oylik</h6>
+                  <h3 class="text-bold mb-10">@Model.ApplicantsCountOnMonts</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="icon-card mb-30">
+                    <div class="icon orange">
+                        <i class="lni lni-folder"></i>
+                    </div>
+                    <div class="content">
+                        <h6 class="mb-10">Jami</h6>
+                        <h3 class="text-bold mb-10">@Model.ApplicantsCount</h3>
+                    </div>
+                </div>
+                <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+          </div>
+
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <div class="title mb-30">
+                  <h2>O'qishni ko'chiruvchilar</h2>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Bugunlik</h6>
+                  <h3 class="text-bold mb-10">@Model.MoversCountOnToday</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Kecha</h6>
+                  <h3 class="text-bold mb-10">@Model.MoversCountOnWeek</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Oylik</h6>
+                  <h3 class="text-bold mb-10">@Model.MoversCountOnMonth</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-folder"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Jami</h6>
+                  <h3 class="text-bold mb-10">@Model.MoversCount</h3>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+          </div>
+
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="title mb-30">
+                        <h2>Foydalanuvchilar</h2>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- ========== title-wrapper end ========== -->
+        <div class="row">
+            @foreach (var item in Model.Users)
+            {
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="icon-card mb-30">
+                        <div class="icon primary">
+                            <i class="lni lni-user"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">@item.Username</h6>
+                            <h3 class="text-bold mb-10">@(item.Applicants.Count + item.Movers.Count) / <span>(@(item.Applicants.Where(w => w.RegistrationDateTime.Year == DateTime.UtcNow.AddHours(5).Year && w.RegistrationDateTime.Month == DateTime.UtcNow.AddHours(5).Month && w.RegistrationDateTime.Day == DateTime.UtcNow.AddHours(5).Day).Count()) t. + @(item.Movers.Where(w => w.RegistrationDateTime.Year == DateTime.UtcNow.AddHours(5).Year && w.RegistrationDateTime.Month == DateTime.UtcNow.AddHours(5).Month && w.RegistrationDateTime.Day == DateTime.UtcNow.AddHours(5).Day).Count()) o'.q.)</span></h3>
+                        </div>
+                    </div>
+                    <!-- End Icon Cart -->
+                </div>
+
+            }
+        </div>
+</section>

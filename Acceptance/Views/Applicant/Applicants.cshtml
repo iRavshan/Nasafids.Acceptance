@@ -1,0 +1,151 @@
+﻿@model Acceptance.ViewModels.Applicant.ApplicantsViewModel
+@{
+    ViewData["Title"] = "Barcha talabgorlar";
+    int counter = 1;
+}
+<section class="table-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2 class="mb-30">Talabgorlar</h2>
+                        @if (User.IsInRole("owner"))
+                        {
+                            <a asp-controller="applicant" asp-action="getexcelfile">Excelni yuklash</a>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#0">Boshqaruv</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Talabgorlar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tables-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-style mb-30">
+                        <h6 class="mb-10">Ro'yxatga olingan talabgorlar</h6>
+                        <p class="text-sm mb-20">Barcha ro'yxatga olingan talabgorlar faqatgina maxsus adminlar uchun ochiq.</p>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-8 col-sm-12">
+                                <div class="select-style-1">
+                                    <div class="select-position">
+                                        <select>
+                                            <option value="name">Ism bo'yicha</option>
+                                            <option value="surname">Familiya bo'yicha</option>
+                                            <option value="datetime">Qo'shilgan sana va vaqt</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                <button type="submit" class="main-btn primary-btn"><i class="lni lni-funnel"></i> Saralash</button>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <form asp-controller="applicant" asp-action="search" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-8">
+                                            <div class="input-style-1">
+                                                <input asp-for="SearchText" type="text" placeholder="Abituriyentning ismi va familiyasi ..." />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-4">
+                                            <button type="submit" class="main-btn primary-btn"><i class="lni lni-search-alt"></i> Qidirish</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="table-wrapper table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th><h6>F.I.O</h6></th>
+                                        <th><h6>To'lov</h6></th>
+                                        <th><h6>Telefon raqami</h6></th>
+                                        <th><h6>Holati</h6></th>
+                                        <th><h6>Ko'proq</h6></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Applicants)
+                                        {
+                                            <tr>
+                                                <td><h6 class="text-sm">@counter</h6></td>
+                                                <td class="min-width">
+                                                    <p>@item.FullName</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    @if(item.TypeOfEducation.ToLower().Equals("kunduzgi"))
+                                                    {
+                                                        double sum = Math.Round(Convert.ToDouble((item.Payments.Sum(w => w.Sum) * 100)) / (item.Faculty.PriceOfDay * 300000));
+
+                                                        if(sum >= 100){
+                                                            <span class="status-btn success-btn">@sum %</span>
+                                                        }
+                                                        else{
+                                                            <span class="status-btn active-btn">@sum %</span>
+                                                        }
+                                                        
+                                                    }
+                                                    @if (item.TypeOfEducation.ToLower().Equals("sirtqi"))
+                                                    {
+                                                        double sum = Math.Round(Convert.ToDouble((item.Payments.Sum(w => w.Sum) * 100)) / (item.Faculty.PriceOfNight * 300000));
+
+                                                        if (sum >= 100)
+                                                        {
+                                                            <span class="status-btn success-btn">@sum %</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="status-btn active-btn">@sum %</span>
+                                                        }
+                                                    }
+                                                </td>
+                                                <td class="min-width">
+                                                    <p>@item.PhoneNumber</p>
+                                                </td>
+                                                <td class="min-width">
+                                                    @if (item.State == 0)
+                                                    {
+                                                        <span class="status-btn active-btn">Kutilmoqda</span>
+                                                    }
+                                                    @if (item.State == 1)
+                                                    {
+                                                        <span class="status-btn close-btn">Qaytarildi</span>
+                                                    }
+                                                    @if (item.State == 2)
+                                                    {
+                                                        <span class="status-btn success-btn">Qabul qilindi</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div class="action">
+                                                        <a class="text-primary" asp-controller="applicant" asp-action="details" asp-route-Id="@item.Id">
+                                                            <i class="lni lni-more-alt"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            counter++;
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

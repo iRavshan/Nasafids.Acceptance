@@ -1,0 +1,127 @@
+﻿@model Acceptance.ViewModels.Invoice.PaymentForApplicant
+@{
+    ViewData["Title"] = "To'lov";
+}
+
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Talabgor</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Boshqaruv</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Talabgor</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <h6 class="mb-25">Shaxsiy ma'lumotlar</h6>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><h5>F.I.SH:</h5></td>
+                                    <td>@Model.Applicant.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Telefon raqami:</h5></td>
+                                    <td>@Model.Applicant.PhoneNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Qo'shimcha telefon raqami:</h5></td>
+                                    <td>@Model.Applicant.SecondPhoneNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Passport seriyasi:</h5></td>
+                                    <td>@Model.Applicant.PassportSeries</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Passport raqami:</h5></td>
+                                    <td>@Model.Applicant.PassportNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>JShIR:</h5></td>
+                                    <td>@Model.Applicant.JShIR</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Manzili:</h5></td>
+                                    <td>@Model.Applicant.Location</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ta'lim yo'nalishi:</h5></td>
+                                    <td>@Model.Applicant.Faculty.Name</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ta'lim shakli:</h5></td>
+                                    <td>@Model.Applicant.TypeOfEducation</td>
+                                </tr>
+                                @if(Model.Applicant.Payments.Count != 0){
+                                    <tr>
+                                        <td><h5>To'lovlar:</h5></td>
+                                        <td><h5>@Model.Applicant.Payments.Count ta</h5></td>
+                                    </tr>
+                                    @foreach (var item in Model.Applicant.Payments.OrderBy(w => w.DateTime))
+                                    {
+                                        <tr>
+                                            <td>@item.DateTime</td>
+                                            <td>@item.Sum so'm (@item.Id)</td>
+                                        </tr>
+                                    }
+                                }
+                                <tr>
+                                    <td><h5>Jami to'lov miqdori:</h5></td>
+                                    <td>@Model.Applicant.Payments.Sum(w => w.Sum) so'm</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ro'yxatga oluvchi:</h5></td>
+                                    <td>@Model.Applicant.User.Username</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Ro'yxatga olingan sana:</h5></td>
+                                    <td>@Model.Applicant.RegistrationDateTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <form asp-controller="invoice" asp-action="paymentforapplicant" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-6">
+                                            <div class="input-style-1">
+                                                <input asp-for="Sum" c placeholder="To'lov miqdorini kiriting ..." required />
+                                                <input asp-for="Applicant.Id" hidden />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6">
+                                            <button class="main-btn success-btn" onclick="return confirm('Rostan ham to`lovni amalga oshirmoqchimisiz ?')">To'lash</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

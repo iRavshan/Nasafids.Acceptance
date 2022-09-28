@@ -1,0 +1,48 @@
+﻿@model Acceptance.ViewModels.Cabinet.IndexViewModel
+@{
+    ViewData["Title"] = "Shaxsiy kabinet";
+}
+
+<section class="tab-components">
+    <div class="container-fluid">
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Shaxsiy kabinet</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="#0">Qabul</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Shaxsiy kabinet</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-elements-wrapper">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card-style mb-30">
+                        <form asp-controller="cabinet" asp-action="index" method="post">
+                            <h6 class="mb-25">Ma'lumotlarni kiriting</h6>
+                            <div asp-validation-summary="All"></div>
+                            <div class="input-style-1">
+                                <label asp-for="FullPassportSeriesNumber"></label>
+                                <input type="text" required asp-for="FullPassportSeriesNumber" />
+                            </div>
+                            <button type="submit" class="main-btn primary-btn w-100">Kirish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
