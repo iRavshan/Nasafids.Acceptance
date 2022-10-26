@@ -416,7 +416,7 @@ namespace Acceptance.Controllers
 
                     document.Add(NewDefaultTitle("KONTRAKT N: " + mover.JShIR));
 
-                    document.Add(NewDefaultTitle("Qarshi shahri                                                                                               " + DateTime.Now.ToString("dd/MM/yyyy")));
+                    document.Add(NewDefaultTitle("Qarshi shahri                                                                                                  " + DateTime.Now.ToString("dd/MM/yyyy")));
 
                     Paragraph mainTitle = new Paragraph("    NASAFIYLAR MEROSI XALQARO UNIVERSITETI (keyingi o'rinlarda “Ta’lim muassasasi”) nomidan rektor (direktor) KURBONOV AKMAL SHERALIYEVICH bir tomondan, " + mover.FullName.ToUpper() + " (keyingi o'rinlarda “Ta’lim oluvchi”) ikkinchi tomondan, birgalikda “Tomonlar” deb ataladigan shaxslar mazkur kontraktni quyidagicha tuzdilar:");
                     mainTitle.Alignment = Element.ALIGN_LEFT;
